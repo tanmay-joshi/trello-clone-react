@@ -3,6 +3,7 @@ import TrelloList from "./TrelloList";
 import TrelloActionBtn from "./TrelloActionBtn";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { deleteTask } from "../actions";
 
 const Listcontainer = styled.div`
   background-color: #fefefe;
@@ -15,6 +16,9 @@ const Listcontainer = styled.div`
 `;
 
 class App extends Component {
+  deleteTaskFunction = data => {
+    this.props.deleteTask(data);
+  };
   render() {
     const List = this.props.lists;
     return (
@@ -24,6 +28,7 @@ class App extends Component {
           {console.log(List)}
           {List.map(item => (
             <TrelloList
+              delete={this.deleteTaskFunction}
               key={item.id}
               id={item.id}
               tasks={item.tasks}
@@ -41,4 +46,8 @@ const mapStateToProps = state => ({
   lists: state.list
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  deleteTask
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

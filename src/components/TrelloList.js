@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import TrelloTask from "./TrelloTask";
 import TrelloActionBtn from "./TrelloActionBtn";
+import { deleteTask } from "../actions";
 
 const ListBg = styled.div`
   background-color: #ededed;
@@ -18,11 +20,22 @@ const TrelloList = props => {
       <h2>{props.title}</h2>
 
       {props.tasks.map(task => (
-        <TrelloTask key={task.id} list={props.title} task={task.title} />
+        <TrelloTask
+          delete={props.delete}
+          listid={props.id}
+          key={task.id}
+          taskid={task}
+          list={props.title}
+          task={task.title}
+        />
       ))}
       <TrelloActionBtn title={props.title} id={props.id} />
     </ListBg>
   );
 };
 
-export default TrelloList;
+const mapDispatchToProps = {
+  deleteTask
+};
+
+export default connect(null, mapDispatchToProps)(TrelloList);

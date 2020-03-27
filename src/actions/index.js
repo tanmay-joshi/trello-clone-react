@@ -17,3 +17,15 @@ export function addList(data) {
     }
   };
 }
+
+export function deleteTask(data) {
+  console.log("deleteTask action initiated", data);
+  return {
+    type: "DELETE_TASK",
+    payload: {
+      list_id: data.listid,
+      list_title: data.title,
+      taskID: data.id
+    }
+  };
+}

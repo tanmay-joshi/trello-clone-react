@@ -29,7 +29,18 @@ const TrelloTask = props => {
   return (
     <TaskBg>
       <h3>{props.task}</h3>
-      <DelBtn>Del</DelBtn>
+      <DelBtn
+        onClick={() => (
+          console.log(props),
+          props.delete({
+            listid: props.listid,
+            title: props.list,
+            id: props.taskid.id
+          })
+        )}
+      >
+        Del
+      </DelBtn>
     </TaskBg>
   );
 };

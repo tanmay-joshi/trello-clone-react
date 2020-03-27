@@ -56,6 +56,20 @@ const listReducer = (state = initialState, action) => {
         { id: state.length, title: action.payload.list_title, tasks: [] }
       ];
 
+    case "DELETE_TASK":
+      console.log(action);
+      return [
+        ...state.slice(0, action.payload.list_id),
+        {
+          id: action.payload.list_id,
+          title: action.payload.list_title,
+          tasks: state[action.payload.list_id].tasks.filter(
+            task => task.id !== action.payload.taskID
+          )
+        },
+        ...state.slice(action.payload.list_id + 1)
+      ];
+
     default:
       return state;
   }
